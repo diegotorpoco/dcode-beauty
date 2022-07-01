@@ -5,10 +5,10 @@ install_requirements:
 	@pip install -r requirements.txt
 
 check_code:
-	@flake8 scripts/* dcode-beauty/*.py
+	@flake8 scripts/* dcodebeauty/*.py
 
 black:
-	@black scripts/* dcode-beauty/*.py
+	@black scripts/* dcodebeauty/*.py
 
 test:
 	@coverage run -m pytest tests/*.py

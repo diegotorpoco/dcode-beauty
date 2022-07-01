@@ -40,6 +40,9 @@ PRODUCTS_PATH = 'paulas_chorice.csv'
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-products = pd.read_csv('DESCRIPTION_PATH')
-data = pd.read_csv('DESCRIPTION_PATH')
-chori_data = pd.read_csv('PAULAS_PATH')
+def read_file():
+    products = pd.read_csv('DESCRIPTION_PATH')
+    data = pd.read_csv('DESCRIPTION_PATH')
+    chori_data = pd.read_csv('PAULAS_PATH')
+
+    return products, data, chori_data
