@@ -1,6 +1,6 @@
 from google.cloud import storage
 import pandas as pd
-
+import os
 
 ### GCP configuration - - - - - - - - - - - - - - - - - - -
 
@@ -16,15 +16,34 @@ BUCKET_NAME = 'dcode-beauty'
 
 ##### Data  - - - - - - - - - - - - - - - - - - - - - - - -
 
-# train data file location
+# Path on GCS
 # or if you want to use the full dataset (you need need to upload it first of course)
-DESCRIPTION_PATH = 'description_clean.csv'
-PAULAS_PATH = 'products.csv'
-PRODUCTS_PATH = 'paulas_chorice.csv'
+#DESCRIPTION_PATH = 'description_clean.csv'
+#PRODUCTS_PATH = 'products.csv'
+#PAULAS_PATH = 'paulas_chorice.csv'
 
-##### Training  - - - - - - - - - - - - - - - - - - - - - -
 
-# not required here
+def read_file_gcs():
+    products = pd.read_csv(PRODUCTS_PATH)
+    data = pd.read_csv(DESCRIPTION_PATH)
+    chori_data = pd.read_csv(PAULAS_PATH)
+
+    return products, data, chori_data
+
+
+#Local Path
+DESCRIPTION_PATH_LOCAL = '../data/description_clean.csv'
+PRODUCTS_PATH_LOCAL= '../data/products.csv'
+PAULAS_PATH_LOCAL = '../data/paulas_chorice.csv'
+
+
+
+def read_file():
+    products = pd.read_csv(PRODUCTS_PATH_LOCAL)
+    data = pd.read_csv(DESCRIPTION_PATH_LOCAL)
+    chori_data = pd.read_csv(PAULAS_PATH_LOCAL)
+
+    return products, data, chori_data
 
 ##### Model - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -39,10 +58,3 @@ PRODUCTS_PATH = 'paulas_chorice.csv'
 # not required here
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-def read_file():
-    products = pd.read_csv('DESCRIPTION_PATH')
-    data = pd.read_csv('DESCRIPTION_PATH')
-    chori_data = pd.read_csv('PAULAS_PATH')
-
-    return products, data, chori_data

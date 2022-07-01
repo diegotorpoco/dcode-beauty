@@ -7,7 +7,8 @@ from dcodebeauty.datos import read_file
 #Funcion de deteccion de productos con un input del usuario - devuelve lista de ingredientes
 
 #En primer lugar el usuario debe tipear el nombre del producto
-product_name = input("Insert product name ")
+#def user_input():
+#    product_name = input("Insert product name ")
 
 #Ejecutamos la función read_file que trae los textos a procesar
 products, data, chori_data = read_file()
