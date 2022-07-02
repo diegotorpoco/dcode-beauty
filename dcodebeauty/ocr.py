@@ -17,9 +17,14 @@ products, data, chori_data = read_file()
 def find_product_description(product_name):
     product_description_list = []
     for i in range(len(products["name"])):
-        if product_name == (products["name"][i].lower()):
+        if product_name.lower() == (products["name"][i].lower()):
             product_description_list.append(products["ingredient_list"][i])
-    return product_description_list[0]
+    if product_description_list == []:
+        print("Product not found, please take a photo of the ingredients")
+    else:
+        texts = product_description_list[0]
+        return texts.split(',')
+
 
 #Funcion OCR - Transforma foto desde un path en lista de ingredientes
 def detect_text(path):
@@ -40,4 +45,6 @@ def detect_text(path):
 
 #Funcion de limpieza de texto
 def cleaning(detect_text):
-    return [''.join(filter(lambda i: i not in "#$%&\'()*+,./:;<=>?@[\\]^_`{|}~\n", item.lower().strip())) for item in detect_text]
+    text = [''.join(filter(lambda i: i not in "#$%&'()*+,.:<=>?@[\\]^_`{|}~\n",item.lower().strip().replace("/" , " ").replace('\"', " ").replace("aqua water", "water").replace("aqua", "water").replace("ingredients", "").replace("INGREDIENTS", "").replace("Ingredients", "").replace("Ingredientes", "").replace("ingredientes" , "").replace("Ingredientes ", "").replace("ingredientes ", ""))) for item in detect_text]
+    text = [t.strip() for t in text]
+    return text
