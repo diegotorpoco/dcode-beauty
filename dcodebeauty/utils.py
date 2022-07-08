@@ -2,18 +2,19 @@ from dcodebeauty.datos import read_file
 from dcodebeauty.pre_utils import find_description
 from dcodebeauty.ocr import find_product_description,detect_text,cleaning
 from gensim.models.ldamodel import LdaModel
-from gensim_func import id2word,corpus
+from dcodebeauty.gensim_func import id2word,corpus
 import pandas as pd
 import numpy as np
 
-
-
-
-def predict_product(text):
+def predict_product(text,search=True):
     ruta_modelo = '../models/model_3_topics'
     model = LdaModel.load(ruta_modelo)
-    product = find_product_description(text)
-    clean_product = cleaning(product)
+    if search:
+        product = find_product_description(text)
+        clean_product = cleaning(product)
+        #description = find_description(clean_product)
+    else:
+        clean_product = cleaning(text)
     description = find_description(clean_product)
     values = [model[id2word.doc2bow(description['descriptions'][i].split())] for i in range(len(description['descriptions']))]
     df_topic = pd.DataFrame(values)

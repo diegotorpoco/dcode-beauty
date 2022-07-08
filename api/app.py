@@ -1,20 +1,20 @@
 from fastapi import FastAPI
+from dcodebeauty.utils import predict_product
 import pandas as pd
-from dcodebeauty.datos import read_file
-from dcodebeauty.ocr import find_product_description,detect_text
-from dcodebeauty.pre_utils import find_description
+import json
 
 app = FastAPI()
 
 @app.get("/predict")
-def predict(description_list):
+def predict(text):
 
-    description_list = description_list
+    df = predict_product(text)
+    df = df.to_json(orient='records')
+    return {'ingredients':df}
 
-
-
-
-
+def json_df(response):
+    res = json.loads(response.content)['ingredients']
+    return pd.read_json(res)
 
     # ⚠️ TODO: get model from GCP
 
