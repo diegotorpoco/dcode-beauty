@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from dcodebeauty.datos import read_file
 import streamlit as st
 from PIL import Image
 from io import StringIO
@@ -12,6 +11,8 @@ import time
 PRODUCTS_PATH_LOCAL= './data/products.csv'
 products_full = pd.read_csv(PRODUCTS_PATH_LOCAL)
 products = products_full["name"]
+
+# products, data, chori_data = read_file()
 
 st.set_page_config(
     page_title="D-Code Beauty App",
@@ -38,6 +39,14 @@ if option:
 else:
     st.markdown('### No product was found, please upload a picture of the ingredients')
 
+# result_product = acá viene el % de productos naturales sobre el total
+# si result_product es entre 0 y 33% una hojita, si es entre 34% y 66% poner dos hojitas y si es +66% poner 3 hojitas
+# Luego imprimir el dataframe en columnas donde es Ingrediente: "Resultado Final"
+# Si la columna resultado final es igual a:
+#   quimico: "[Tubo de ensayo] The origin of this product is synthetic"
+#   natural: "[Hojita] The origin of this product is natural"
+#   otro: "[Signo de pregunta] We don't have enough information about this product, so please head to the sidebar
+# for more details on the product"
 
 # SUBIR LA FOTITO DESDE LA COMPU
 uploaded_file = st.file_uploader("Choose a file")
@@ -49,7 +58,14 @@ with st.spinner('Wait for it...'):
     time.sleep(5)
 st.success('Done!')
 
+# result_OCR = acá viene el % de productos naturales sobre el total
+# si result_product es entre 0 y 33% una hojita, si es entre 34% y 66% poner dos hojitas y si es +66% poner 3 hojitas
+# Luego imprimir el dataframe en columnas donde es Ingrediente: "Resultado Final"
+# Si la columna resultado final es igual a:
+#   quimico: "[Tubo de ensayo] The origin of this product is synthetic"
+#   natural: "[Hojita] The origin of this product is natural"
+#   otro: "[Signo de pregunta] We don't have enough information about this product, so please head to the sidebar
+# for more details on the product"
 
 #PARA LOS PRODUCTOS PELIGROSOS
 st.warning('This is a warning')
-

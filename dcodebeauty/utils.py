@@ -24,7 +24,7 @@ def predict_product(text,search=True):
     df_topic['quimico'] = df_topic['quimico'].apply(lambda x: x[1])
     df_topic['efecto'] = df_topic['efecto'].apply(lambda x: x[1])
     df_topic['natural'] = df_topic['natural'].apply(lambda x: x[1])
-    df_topic = df_topic.set_index('Ingredient')
+    # df_topic = df_topic.set_index('Ingredient')
 
     conds = [
     (df_topic['quimico'] > df_topic['efecto']) & (df_topic['quimico'] > df_topic['natural']),

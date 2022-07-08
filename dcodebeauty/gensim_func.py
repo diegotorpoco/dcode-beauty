@@ -10,7 +10,12 @@ from gensim.models import CoherenceModel
 products,data,chori_data = read_file()
 data = data['description']
 
-stopwords = stopwords.words("english")
+try:
+    stopwords = stopwords.words("english")
+except LookupError:
+    from dcodebeauty.req import install
+    install()
+    stopwords = stopwords.words("english")
 ignore_words = ['skin','oil','also','water','ingredient','used','property','work','antioxidant','product','products','formula']
 
 
