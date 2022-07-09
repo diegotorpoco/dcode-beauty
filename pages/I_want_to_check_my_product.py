@@ -5,7 +5,7 @@ import streamlit as st
 from PIL import Image
 from io import StringIO
 import time
-
+import requests
 
 #products, data, chori_data = read_file()
 PRODUCTS_PATH_LOCAL= './data/products.csv'
@@ -48,15 +48,30 @@ else:
 #   otro: "[Signo de pregunta] We don't have enough information about this product, so please head to the sidebar
 # for more details on the product"
 
+var = st.text_input('Texto')
+var
+if var:
+    api_url = "https://localhost:8000/predict"
+    params = {'text':var}
+    res = requests.get(api_url, params = params)
+    res
+
+
+
 # SUBIR LA FOTITO DESDE LA COMPU
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
-     photo = Image.open(uploaded_file)
-     st.image(photo, use_column_width=False)
+    if st.button('predecir'):
+        # photo = Image.open(uploaded_file)
+        st.image(uploaded_file, use_column_width=False)
+        params = {"img": uploaded_file.getvalue()}
+        api_url = "https://127.0.0.1:8000/predict_photo"
+        res = requests.post(api_url, files=params,verify=False)
 
-with st.spinner('Wait for it...'):
-    time.sleep(5)
-st.success('Done!')
+
+# with st.spinner('Wait for it...'):
+#     time.sleep(5)
+# st.success('Done!')
 
 # result_OCR = acá viene el % de productos naturales sobre el total
 # si result_product es entre 0 y 33% una hojita, si es entre 34% y 66% poner dos hojitas y si es +66% poner 3 hojitas
@@ -68,4 +83,4 @@ st.success('Done!')
 # for more details on the product"
 
 #PARA LOS PRODUCTOS PELIGROSOS
-st.warning('This is a warning')
+# st.warning('This is a warning')
