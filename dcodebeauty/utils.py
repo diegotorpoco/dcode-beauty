@@ -6,6 +6,7 @@ from dcodebeauty.gensim_func import id2word,corpus
 import pandas as pd
 import numpy as np
 
+
 def predict_product(text,search=True):
     ruta_modelo = '../models/model_3_topics'
     model = LdaModel.load(ruta_modelo)

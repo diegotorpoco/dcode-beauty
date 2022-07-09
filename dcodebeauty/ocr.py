@@ -27,6 +27,17 @@ def find_product_description(product_name):
 
 
 #Funcion OCR - Transforma foto desde un path en lista de ingredientes
+def detect_photo(img):
+    """Detects text in the file."""
+    # from google.cloud import vision
+    # import io
+    client = vision.ImageAnnotatorClient()
+    image = vision.Image(content=img.file)
+
+    response = client.text_detection(image=image)
+    text = str((response.text_annotations[0]).description)
+    return text.split(',')
+
 def detect_text(path):
     """Detects text in the file."""
     # from google.cloud import vision
@@ -39,8 +50,8 @@ def detect_text(path):
     image = vision.Image(content=content)
 
     response = client.text_detection(image=image)
-    texts = str((response.text_annotations[0]).description)
-    return texts.split(',')
+    text = str((response.text_annotations[0]).description)
+    return text.split(',')
 
 
 #Funcion de limpieza de texto
