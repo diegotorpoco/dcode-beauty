@@ -35,13 +35,13 @@ st.markdown(
     **👈 Please select an option from the sidebar**
     """
 )
-var = st.text_input('Texto')
-api_url = "http://0.0.0.0:8888/predict"
+# var = st.text_input('Texto')
+# api_url = "http://0.0.0.0:8888/predict"
 
-if var:
-    params = {'text':var}
-    res = requests.post(api_url, params = params)
-    res.content
+# if var:
+#     params = {'text':var}
+#     res = requests.post(api_url, params = params)
+#     res.content
 
 # # ACA TENEMOS QUE DEFINIR QUE MOSTRAR
 # sidebar = st.sidebar.radio('Please select an option', ("I want to check the product", "More info about ingredients"))
