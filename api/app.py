@@ -18,9 +18,8 @@ app.add_middleware(
 )
 
 
-@app.get("/predict")
+@app.post("/predict")
 def predict(text):
-
     df = predict_product(text)
     df = df.to_json(orient='records')
     return {'ingredients':df}

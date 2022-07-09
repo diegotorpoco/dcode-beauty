@@ -4,12 +4,16 @@ from io import StringIO
 import time
 from dcodebeauty.datos import read_file
 import pandas as pd
-
+import requests
 #para probarlo correr
 #url = http://localhost:8501/
 
 
 # page conf
+
+
+
+
 st.set_page_config(
     page_title="D-Code Beauty App",
     page_icon="🌿",
@@ -27,11 +31,17 @@ st.markdown(
     """
     D-Code Beauty App is here to help decode your skincare routine.
 
-    
-    **👈 Please select an option from the sidebar** 
+
+    **👈 Please select an option from the sidebar**
     """
 )
+var = st.text_input('Texto')
+api_url = "http://0.0.0.0:8888/predict"
 
+if var:
+    params = {'text':var}
+    res = requests.post(api_url, params = params)
+    res.content
 
 # # ACA TENEMOS QUE DEFINIR QUE MOSTRAR
 # sidebar = st.sidebar.radio('Please select an option', ("I want to check the product", "More info about ingredients"))

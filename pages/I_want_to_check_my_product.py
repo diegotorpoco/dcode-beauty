@@ -6,6 +6,7 @@ from PIL import Image
 from io import StringIO
 import time
 import requests
+import json
 
 #products, data, chori_data = read_file()
 PRODUCTS_PATH_LOCAL= './data/products.csv'
@@ -49,25 +50,24 @@ else:
 # for more details on the product"
 
 var = st.text_input('Texto')
-var
-if var:
-    api_url = "https://localhost:8000/predict"
-    params = {'text':var}
-    res = requests.get(api_url, params = params)
-    res
+api_url = "http://0.0.0.0:8888/predict"
 
+if var:
+    params = {'text':var}
+    res = requests.post(api_url, params = params)
+    res.status_code
 
 
 # SUBIR LA FOTITO DESDE LA COMPU
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     if st.button('predecir'):
-        # photo = Image.open(uploaded_file)
         st.image(uploaded_file, use_column_width=False)
         params = {"img": uploaded_file.getvalue()}
-        api_url = "https://127.0.0.1:8000/predict_photo"
+        api_url = "http://0.0.0.0:8888/predict_photo"
         res = requests.post(api_url, files=params,verify=False)
-
+        res = json.loads(res.content)['ingredients']
+        st.write(pd.read_json(res))
 
 # with st.spinner('Wait for it...'):
 #     time.sleep(5)

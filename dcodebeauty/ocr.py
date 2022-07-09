@@ -32,9 +32,9 @@ def detect_photo(img):
     # from google.cloud import vision
     # import io
     client = vision.ImageAnnotatorClient()
-    image = vision.Image(content=img.file)
+    # image = vision.Image(content=img)
 
-    response = client.text_detection(image=image)
+    response = client.text_detection(image=img.file)
     text = str((response.text_annotations[0]).description)
     return text.split(',')
 
