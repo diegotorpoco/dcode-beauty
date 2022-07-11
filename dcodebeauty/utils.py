@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 
 
+
 def predict_product(text,search=True):
     ruta_modelo = '../models/model_3_topics'
     model = LdaModel.load(ruta_modelo)
@@ -35,11 +36,14 @@ def predict_product(text,search=True):
     df_topic['resultado_parcial'] = np.select(conds,leters)
 
     conds2 = [
-    (df_topic['quimico'] > df_topic['natural'])& (df_topic['quimico']-(df_topic['natural'])>0.1),
-    (df_topic['natural'] > df_topic['quimico'])& (df_topic['natural']-(df_topic['quimico'])>0.1),
-    (df_topic['quimico'] > df_topic['natural']),
-    (df_topic['natural'] > df_topic['quimico'])]
-    leters2 = ['quimico','natural','no se puede determinar','no se puede determinar']
+        (df_topic['resultado_parcial'] == 'efecto') & (df_topic['quimico']-(df_topic['natural'])>0.1),
+        (df_topic['resultado_parcial'] == 'efecto')& (df_topic['natural']-(df_topic['quimico'])>0.1),
+        (df_topic['resultado_parcial'] == 'efecto') & (df_topic['quimico']-(df_topic['natural'])<0.1),
+        (df_topic['resultado_parcial'] == 'efecto')& (df_topic['natural']-(df_topic['quimico'])<0.1),
+        (df_topic['resultado_parcial'] == 'quimico'),
+        (df_topic['resultado_parcial'] == 'natural')
+     ]
+    leters2 = ['quimico','natural','no se puede determinar','no se puede determinar','quimico','natural']
     df_topic['resultado_final'] = np.select(conds2,leters2)
 
     return df_topic
