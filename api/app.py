@@ -20,7 +20,7 @@ app.add_middleware(
 
 @app.post("/predict")
 def predict(text):
-    df = predict_product(text)
+    df =  predict_product(text)
     df = df.to_json(orient='records')
     return {'ingredients':df}
 
@@ -30,7 +30,7 @@ def predict(text):
 
 @app.post("/predict_photo")
 def predict_photo(img: UploadFile = File(...)):
-    text = detect_photo(img)
-    df = predict_product(text,search=False)
+    text =  detect_photo(img)
+    df =  predict_product(text,search=False)
     df = df.to_json(orient='records')
     return {'ingredients':df}

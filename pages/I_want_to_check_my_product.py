@@ -1,9 +1,10 @@
+from distutils.command.upload import upload
 import streamlit as st
 import numpy as np
 import pandas as pd
 import streamlit as st
-from PIL import Image
-from io import StringIO
+# from PIL import Image
+# from io import StringIO
 import time
 import requests
 import json
