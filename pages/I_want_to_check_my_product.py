@@ -34,7 +34,7 @@ st.write("🌿🌿 Means less than 66% of its ingredients are natural")
 st.write("🌿🌿🌿 Means more than 67% of its ingredients are natural")
 
 var = st.text_input('Please type the name of your product below')
-api_url = "http://0.0.0.0:8888/predict" #acá hay que levantar la url de gcp
+api_url = "https://dcodebeauty-api-o4dbbg4ljq-uc.a.run.app/predict" #acá hay que levantar la url de gcp
 
 if var:
     params = {'text':var}
@@ -76,7 +76,7 @@ if uploaded_file is not None:
     if st.button('Check me out!'):
         st.image(uploaded_file, width=200)
         params = {"img": uploaded_file.getvalue()}
-        api_url = "http://0.0.0.0:8888/predict_photo"  #acá hay que levantar la url de gcp
+        api_url = "https://dcodebeauty-api-o4dbbg4ljq-uc.a.run.app/predict_photo"  #acá hay que levantar la url de gcp
         res = requests.post(api_url, files=params,verify=False)
         res = json.loads(res.content)['ingredients']
         res = pd.read_json(res)

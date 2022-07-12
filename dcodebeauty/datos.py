@@ -12,21 +12,20 @@ import os
 
 ### GCP Storage - - - - - - - - - - - - - - - - - - - - - -
 
-BUCKET_NAME = 'dcode-beauty'
+BUCKET_NAME = 'wagon-data-840-torpoco' #anadi
 
 ##### Data  - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Path on GCS
 # or if you want to use the full dataset (you need need to upload it first of course)
-#DESCRIPTION_PATH = 'description_clean.csv'
-#PRODUCTS_PATH = 'products.csv'
-#PAULAS_PATH = 'paulas_chorice.csv'
-
+DESCRIPTION_PATH = 'data/description_clean.csv'
+PRODUCTS_PATH = 'data/products.csv'
+PAULAS_PATH = 'data/paulas_chorice.csv'
 
 def read_file_gcs():
-    products = pd.read_csv(PRODUCTS_PATH)
-    data = pd.read_csv(DESCRIPTION_PATH)
-    chori_data = pd.read_csv(PAULAS_PATH)
+    products = pd.read_csv(f"gs://{BUCKET_NAME}/{PRODUCTS_PATH}")
+    data = pd.read_csv(f"gs://{BUCKET_NAME}/{DESCRIPTION_PATH}")
+    chori_data = pd.read_csv(f"gs://{BUCKET_NAME}/{PAULAS_PATH}")
 
     return products, data, chori_data
 

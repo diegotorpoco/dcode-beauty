@@ -2,7 +2,7 @@
 from google.cloud import vision
 import io
 import pandas as pd
-from dcodebeauty.datos import read_file
+from dcodebeauty.datos import read_file_gcs
 
 #Funcion de deteccion de productos con un input del usuario - devuelve lista de ingredientes
 
@@ -11,7 +11,7 @@ from dcodebeauty.datos import read_file
 #    product_name = input("Insert product name ")
 
 #Ejecutamos la función read_file que trae los textos a procesar
-products, data, chori_data = read_file()
+products, data, chori_data = read_file_gcs()
 
 #Luego el modelo detecta los ingredientes del producto y los convierte en una lista
 def find_product_description(product_name):

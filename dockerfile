@@ -13,4 +13,4 @@ COPY data /data
 
 RUN python -m spacy download en_core_web_sm
 
-CMD uvicorn api.app:app --host 0.0.0.0 --port 80
+CMD uvicorn api.app:app --host 0.0.0.0 --port $PORT
